@@ -1,3 +1,9 @@
+/*Inmediately invoked funtion expression IIFE =
+Hacer más seguro el código -> lógica en función flecha que se ejecuta desde el inicio 
+= no acceso desde la consola a las funciones (lógica)
+*/ 
+(()=>{ 
+
 const btn= document.querySelector("[data-form-btn]");
 
 const crearTarea = (e) => {
@@ -11,14 +17,15 @@ const crearTarea = (e) => {
     const taskTitle = document.createElement("span");
     taskTitle.classList.add("task");
     taskTitle.innerText = value; 
-    const content = `
-    <i class="fas fa-trash-alt trashIcon icon"></i>`
+    const content = ``;
     //task.innerHTML = content;
     list.appendChild(task);
     task.appendChild(taskContent);
     taskContent.appendChild(checkComplete());
     taskContent.appendChild(taskTitle);
+    task.appendChild(deleteTaks());
     task.classList.add("card");
+    
 }
 
 btn.addEventListener("click", crearTarea);
@@ -45,3 +52,20 @@ const taskComplete = (e) =>{
     elementoSeleccionado.classList.toggle("completeIcon");
     elementoSeleccionado.classList.toggle("far");
 }
+
+const deleteTaks = () =>{
+    const borrar = document.createElement("i");
+    borrar.classList.add("fas", "fa-trash-alt", "trashIcon", "icon");
+    borrar.addEventListener("click", deleteComplete)
+    return borrar;
+}
+
+const deleteComplete = (e) => {
+    //console.log(e.target);
+        //Saber cuál es el elemento padre
+    //console.log(e.target.parentElement);
+        //Borrar el padre (li)
+    const parent = e.target.parentElement;
+    parent.remove();
+}
+})();
